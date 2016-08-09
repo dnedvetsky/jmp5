@@ -13,11 +13,12 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, MalformedURLException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         Scanner sc = new Scanner(System.in);
         String line = "";
+        CustomClassLoader classLoader = new CustomClassLoader(sc.nextLine());
         while (!line.equals("exit")) {
             line = sc.nextLine();
             if (line.equals("exit")) break;
-            Class<?> cl = new CustomClassLoader("target\\classes\\").loadClass(line);
-            cl.getDeclaredMethod("signal").invoke(cl.newInstance());
+            Class<?> cl = classLoader.loadClass(line);
+            cl.getDeclaredMethod("lever").invoke(cl.newInstance());
         }
     }
 }

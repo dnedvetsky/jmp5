@@ -18,8 +18,16 @@ public class URLCustomClassLoader extends URLClassLoader {
     }
 
     @Override
+    /**
+     * Method is used to locate class. Check to return class if it's already loaded.
+     */
     public Class<?> findClass(String name) throws ClassNotFoundException {
         System.out.println("Attempt to locate class by provided name" + name);
+        Class<?> loadedClass = findLoadedClass(name);
+        if (loadedClass != null) {
+            System.out.println("Class " + name + "is already loaded and returned as it is");
+            return loadedClass;
+        }
         return super.findClass(name);
     }
 }
